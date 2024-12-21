@@ -1,0 +1,30 @@
+<div class="add-menu-container">
+  <form #addMenuForm="ngForm" (ngSubmit)="onSubmit(addMenuForm)">
+
+    <div>
+      <label for="titre">Titre</label>
+      <input id="titre" name="titre" [(ngModel)]="titre" required #titreControl="ngModel"/>
+      <div *ngIf="titreControl.invalid && titreControl.touched">
+        <small class="error">Le titre est obligatoire</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" name="description" [(ngModel)]="description" required minlength="10" #descriptionControl="ngModel"></textarea>
+      <div *ngIf="descriptionControl.invalid && descriptionControl.touched">
+        <small class="error" *ngIf="descriptionControl.errors?.['required']">
+          La description est obligatoire.
+        </small>
+        <small class="error" *ngIf="descriptionControl.errors?.['minlength']">
+          La description doit contenir au moins 10 caractères.
+        </small>
+
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" [disabled]="addMenuForm.invalid">Ajouter le Menu</button>
+    </div>
+  </form>
+</div>
